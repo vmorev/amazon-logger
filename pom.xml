@@ -5,13 +5,12 @@
     <artifactId>amazon-logger</artifactId>
     <packaging>jar</packaging>
     <name>amazon-logger</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <properties>
         <java.version>1.7</java.version>
         <java.sourceEncoding>UTF-8</java.sourceEncoding>
     </properties>
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
