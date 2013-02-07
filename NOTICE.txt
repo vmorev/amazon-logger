@@ -1,0 +1,13 @@
+Crawler application
+Copyright 2012-2013 by Valentin Morev. All Rights Reserved.
+
+This product includes software developed by Valentin Morev (http://github.com/vmorev).
+
+**********************
+THIRD PARTY COMPONENTS
+**********************
+
+This software includes third party software subject to the following copyrights:
+- AWS SDK for Java - Copyright 2010-2012 Amazon.com, Inc. or its affiliates.
+
+The licenses for these third party components are included in LICENSE.txt

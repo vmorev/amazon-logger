@@ -4,11 +4,13 @@ Log4j appender which saves logs to Amazon.
 Current implementation is quite simple and supports only S3 as a storage. 
 It batches messages as per configurable batch size and store each batch to separate file in S3 bucket.
 
+Code is available under Apache 2.0 license.
+
 My task list is:
-- [ ] separate thread to push messages to server
-- [ ] shutdown hook to save messages on application termination
-- [ ] error handler instead of e.printStackTrace()
-- [ ] another Amazon services support like SNS, SQS, SDB, DynamoDB
+- [] separate thread to push messages to server
+- [] shutdown hook to save messages on application termination
+- [] error handler instead of e.printStackTrace()
+- [] another Amazon services support like SNS, SQS, SDB, DynamoDB
 
 Feel free to create pull requests or issues :)
 
