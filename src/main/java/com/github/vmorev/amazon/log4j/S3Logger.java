@@ -19,7 +19,7 @@ public class S3Logger extends AppenderSkeleton {
     private int batchSize;
 
     public void setBatchSize(String batchSize) {
-        this.batchSize = OptionConverter.toInt(batchSize, 1);
+        this.batchSize = OptionConverter.toInt("".equals(batchSize) ? null : batchSize, 1);
     }
 
     public void setAccessKey(String accessKey) {
@@ -53,7 +53,8 @@ public class S3Logger extends AppenderSkeleton {
     }
 
     public void close() {
-        cache.close();
+        if(cache != null)
+            cache.close();
     }
 
     public boolean requiresLayout() {
