@@ -5,7 +5,7 @@
     <artifactId>amazon-logger</artifactId>
     <packaging>jar</packaging>
     <name>amazon-logger</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <properties>
         <java.version>1.7</java.version>
         <java.sourceEncoding>UTF-8</java.sourceEncoding>
