@@ -4,6 +4,8 @@ import com.amazonaws.services.s3.AmazonS3;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,9 +33,35 @@ public class LogCache {
         return tmpInstance;
     }
 
+    private class ShutDownHook extends Thread {
+        public void run() {
+            close();
+            System.out.println(this.getClass().getName() + " all logs were saved");
+        }
+    }
+
+    private class MessagesPusher extends Thread {
+        private Collection<LogCacheLine> logLines2Sync;
+
+        public void setLogLines2Sync(Collection<LogCacheLine> logLines2Sync) {
+            this.logLines2Sync = logLines2Sync;
+        }
+
+        public void run() {
+            if (logLines2Sync != null && logLines2Sync.size() > 0) {
+                String key = helper.getS3LogBucket() + "-" + logLines.size() + "-" + System.currentTimeMillis() + ".json";
+                try {
+                    helper.saveS3Object(helper.getS3LogBucket(), key, logLines);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public LogCache() {
         logLines = new ArrayList<>();
-        //TODO add shutdown hook and call close
+        Runtime.getRuntime().addShutdownHook(new ShutDownHook());
     }
 
     public void setHelper(AWSHelper helper) {
@@ -61,16 +89,13 @@ public class LogCache {
     }
 
     private void pushMessages() {
-        //TODO create async pusher thread or reuse if exist
         if (!isOpen)
             init();
 
-        String key = helper.getS3LogBucket() + "-" + logLines.size() + "-" + System.currentTimeMillis() + ".json";
-        try {
-            helper.saveS3Object(helper.getS3LogBucket(), key, logLines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MessagesPusher pusher = new MessagesPusher();
+        pusher.setLogLines2Sync(Collections.unmodifiableCollection(logLines));
+        pusher.start();
+
         logLines = new ArrayList<>();
     }
 
@@ -84,10 +109,6 @@ public class LogCache {
     public void close() {
         if (logLines.size() > 0)
             pushMessages();
-
-        if (isOpen) {
-            //TODO shutdown pusher thread
-        }
     }
 
 }

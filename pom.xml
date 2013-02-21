@@ -5,7 +5,7 @@
     <artifactId>amazon-logger</artifactId>
     <packaging>jar</packaging>
     <name>amazon-logger</name>
-    <version>1.1</version>
+    <version>1.2</version>
     <properties>
         <java.version>1.7</java.version>
         <java.sourceEncoding>UTF-8</java.sourceEncoding>
@@ -60,47 +60,26 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--plugin> 
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId> 
-                <version>2.7</version>
-                <executions> 
-                    <execution> 
-                        <id>deploy</id>
-                        <phase>deploy</phase>
-                        <goals><goal>deploy</goal></goals> 
-                    </execution> 
-                </executions> 
-            </plugin-->
-            <!--plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.4</version>
-            </plugin-->
         </plugins>
     </build>
     <dependencies>
 
-        <!-- AWS -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.7.1</version>
+            <groupId>com.github.vmorev</groupId>
+            <artifactId>amazon-common</artifactId>
+            <version>0.4</version>
         </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
+        <!-- AWS -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.3.27</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-flow-build-tools</artifactId>
-            <version>1.3.27</version>
-        </dependency>
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.19</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -138,18 +117,6 @@
             <version>1.7.2</version>
         </dependency>
     </dependencies>
-    <!--distributionManagement>  
-        <repository>
-            <id>github</id>  
-            <name>Release Repository</name>  
-            <url>https://raw.github.com/vmorev/amazon-logger/binaries</url>  
-        </repository>  
-        <snapshotRepository>
-            <id>github-snapshot</id>  
-            <name>Release Repository</name>  
-            <url>https://raw.github.com/vmorev/amazon-logger/binaries</url>  
-        </snapshotRepository>  
-    </distributionManagement--> 
     <repositories>
         <repository>
             <id>project</id>
